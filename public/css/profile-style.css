@@ -1,0 +1,216 @@
+hr{
+    height: 5px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border: none;
+}
+
+.team-column{
+    text-align: left;
+}
+
+.in-line{
+    display: inline-block;
+}
+
+.small-font{
+    font-size: 12px;
+}
+
+.no-padding{
+    padding-left: 0px;
+}
+
+.inner-div{
+    width: 84%;
+    margin: auto;
+}
+
+#profile-body{
+    width: 100%;
+    margin:auto;
+    color:#ffffff;
+}
+
+#info-container{
+    background-image:url(img/junkertown.png);
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin:auto;
+    height: 499px;
+}
+
+#info-section{
+    width:80%;
+    margin:auto;
+    padding-top: 5%;
+}
+
+.top-section{
+    display: inline-block;
+    margin-top: 25px;
+    
+}
+
+#player-info{
+    margin-right: 8%;
+    position: relative;
+    top: 25px;
+    width: 50%;
+}
+
+#profile-pic{
+    width: 80px;
+    height: 80px;
+    background-image: url(img/build_team/icons/mccree.jpg);
+    background-size: cover;
+    position:relative;
+    top: 10px;
+}
+
+#player-details{
+    position: relative;
+    margin-left: 15px;
+}
+
+#user-name{
+    font-size: 64px;
+    font-weight: 100;
+    font-style:italic;
+    letter-spacing: -5px;
+    margin:auto;
+    padding-top: 150px;
+}
+
+#player-info h3{
+    margin-top: 5px;
+    margin-bottom: auto;
+    color: #ffffffb3;
+    font-size: 24px;
+}
+
+#hero-pic{
+    background-image:url(img/profile-hero-1.png);
+    background-size:contain;
+    background-repeat: no-repeat;
+    position:absolute;
+    right: 5%;
+    top: 7%;
+    width: 50%;
+    height: 33%;
+}
+
+#schedule-container{
+    background-color: #3d4e7c;
+}
+
+#schedule{
+    margin: auto;
+    padding-bottom: 25px;
+    width:80%;
+}
+
+#schedule>h2{
+    margin:auto;
+    padding-top: 25px;
+}
+
+#schedule-list-container{
+    overflow: auto;
+    height: 300px;
+    margin-top:15px;
+    margin-bottom: 35px;
+    margin-left: auto;
+    margin-right: auto;
+    width:80%;
+}
+
+#schedule-list{
+    padding-bottom: 15px;
+}
+
+#team-info{
+    width:25%;
+}
+
+.daily-schedule{
+    padding-left: 25px;
+}
+
+#schedule-list li{
+    list-style-type: none;
+    font-size: 24px;
+    font-style: italic;
+}
+
+.schedule-table{
+    border:none;
+    color: #345177;
+    width: 80%;
+    padding-bottom: 10px;
+}
+
+.schedule-table tr, .profile-standings-table tr{
+    background-color: #f0edf2;
+    border:none;
+}
+
+.schedule-table tr:nth-of-type(odd), .profile-standings-table tr:nth-of-type(odd){
+    background-color: #d7deed;
+    border:none;
+}
+
+.schedule-table th, .profile-standings-table th{
+    text-align: center;
+    font-size: 18px;
+    background-color: #abb9d8;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.schedule-table td{
+    text-align: center;
+    border:none;
+    padding-right: 25px;
+    padding-left: 25px;
+    font-weight:600;
+    font-size: 16px;
+}
+
+#standings-section{
+    background-color: #3d4e7c;
+    padding-bottom: 25px;
+}
+
+#profile-standings-container{
+    width: 80%;
+    height: 375px;
+    margin: auto;
+    padding-bottom: 50px;
+    overflow: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+
+#profile-standings-container>h2{
+    margin-top:0px;
+}
+
+.profile-standings{
+    width: 30%;
+    margin-left:1.5%;
+    margin-right:1.5%;
+}
+
+.profile-standings-table td{
+    text-align: center;
+    border:none;
+    padding-right: 5px;
+    padding-left: 5px;
+    font-weight:600;
+    font-size: 16px;
+}
+
+.profile-standings-table{
+    color: #345177;
+}

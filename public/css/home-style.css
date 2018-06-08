@@ -1,0 +1,284 @@
+body{
+	font-family: FuturaNo2D,century gothic,arial,sans-serif;
+	color: #345177;
+}
+
+#billboardContainer{
+    height: 800px;
+	width: 100%;
+    padding-top: 1px;
+	background-image: url(../img/LightBackground_edit2.jpg);
+	background-size:cover;
+	position:relative;
+	z-index:0;
+	margin-bottom: auto;
+}
+
+.mySlides{
+	display: none;
+}
+
+.mySlides img{
+    vertical-align: middle;
+	width: 100%;
+	height:550px;
+}
+
+#mySlides1{
+    background-image: url(../img/kings_row_dark.jpg);
+    background-size: cover;
+	vertical-align: middle;
+	width: 100%;
+	height:550px;
+}
+
+.slideContent{
+    padding-top: 10%;
+    margin-left: 6%;
+    color: #ffffff;
+    position: relative;
+}
+
+.slideContent h1{
+    text-transform: uppercase;
+    font-size:84px;
+    color: #2fefef;
+    font-style: italic;
+    letter-spacing: -2px;
+    font-weight: 100;
+    text-shadow: 2px 2px 5px #777a84;
+    margin-bottom: auto;
+}
+
+.slideContent h2{
+    margin-top: auto;
+    text-shadow: 2px 2px 5px #777a84;
+    margin-left: 1%;
+    font-style: italic;
+}
+
+.slideContent p{
+    font-size: 18px;
+}
+
+.slideContent ul{
+    padding-left: 4%;
+}
+
+.slideContent li{
+    list-style-type: none;
+    font-size: 18px;
+    margin:10px;
+    text-shadow: 2px 2px 5px #777a84;
+}
+
+.slideContent li a{
+    text-decoration: none;
+    color: #ffffff;
+    text-shadow: 2px 2px 5px #777a84;
+    transition: 0.2s;
+}
+
+.slideContent li a:hover{
+    color: #ff9c00;
+}
+
+#nowEntering{
+    position:absolute;
+    right: 2%;
+    bottom: 2%;
+    cursor:default;
+}
+
+#owLogo{
+    width:70px;
+    height:43px;
+    background-image: url(../img/ow_flag.jpg);
+    background-size: cover;
+    display: inline-block;
+    margin: auto;
+    position: relative;
+    top: 5px;
+}
+
+#loading{
+    position: absolute;
+    color: rgba(119, 207, 234, 0.60);
+    font-size: 64px;
+    font-style: italic;
+    text-transform: uppercase;
+    bottom:55%;
+    left: 25%;
+    letter-spacing: -5px;
+    font-weight: 100;
+    z-index:0;
+}
+
+#betterOverwatch{
+    position: relative;
+    color: rgba(255, 255, 255, 0.90);
+    font-size: 50px;
+    font-style: italic;
+    text-transform: uppercase;
+    letter-spacing: -5px;
+    margin-left: 10px;
+    z-index: 999;
+}
+
+.slideshow-container {
+  max-width: 80%;
+  max-height: 550px;
+  position: relative;
+  margin: auto;
+  margin-top: 90px;
+  
+}
+
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.2s ease;
+  border-radius: 0 3px 3px 0;
+}
+
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.8);
+    color: #ff9c00;
+}
+
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  background-color: #ff9c00;
+}
+
+#howToSection{
+    width: 100%;
+    position:relative;
+	/*bottom: 50px;*/
+    margin:auto;
+	padding-top: 50px;
+	padding-bottom: 50px;
+	background-image: url(../img/LijiangBar.jpg);
+	background-attachment: fixed;
+}
+
+.howTo{
+    width: 100%;
+    height: 500px;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top: 10%;
+	background-color: transparent;
+	position: relative;
+}
+
+.howToContent{
+	background-color: #f0edf2;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 75%;
+}
+
+.howToImage-left{
+	display: inline-block;
+	background-image: url(../img/how_to/Doomfist.png);
+	background-size: contain;
+	background-position: left bottom;
+    background-repeat: no-repeat;
+	width:33%;
+	height:120%;
+	position: absolute;
+	bottom: 0;
+	margin-left: 10%;
+}
+
+.howToImage-right{
+	display: inline-block;
+	background-image: url(../img/profile-hero-1.png);
+	background-size: contain;
+	background-position: left bottom;
+    background-repeat: no-repeat;
+	width:50%;
+	height:120%;
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+}
+
+.howToContent-right{
+	position: absolute;
+	right: 10%;
+	width: 45%;
+    text-align: center;
+}
+
+.howToContent-right li{
+    font-size: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    list-style-type: none;
+    font-weight: 600;
+}
+
+.howToContent-right h2{
+	position: relative;
+    font-size: 48px;
+    font-weight: 400;
+    font-style: italic;
+    letter-spacing: -1px;
+    text-shadow: 2px 2px 5px #777a84;
+}
+
+.howToContent-left{
+	position: absolute;
+	left: 10%;
+	width: 45%;
+    text-align: center;
+}
+
+.howToContent-left li{
+    font-size: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    list-style-type: none;
+    font-weight: 600;
+}
+
+.howToContent-left h2{
+	position: relative;
+    font-size: 48px;
+    font-weight: 400;
+    font-style: italic;
+    letter-spacing: -1px;
+    text-shadow: 2px 2px 5px #777a84;
+}
+
+.howToContent-right p{
+	position: relative;
+    padding-left: 10px;
+    padding-right: 10px;
+	color: #345177
+}

@@ -1,0 +1,38 @@
+<head>
+    {{#each styleSheet}}
+        <link rel="stylesheet" href="./public/css/{{this}}">
+    {{/each}}
+    <!--    
+    <link rel="stylesheet" type="text/css" href="/public/owstyle.css">
+	<link rel="stylesheet" type="text/css" href="/public/home-style.css"> -->
+</head>
+
+<div class="content">
+    <h1>Matches - Team Kill</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Time</th>
+                <th>Day</th>
+                <th>League</th>
+                <th>Home Team</th>
+                <th>Away Team</th>
+                <th>Result</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each match}}
+            <tr>
+                <td>{{m_id}}</td>
+                <td>{{time}}</td>
+                <td>{{month}}/{{day}}/{{year}}</td>
+                <td>{{m_league}}</td>
+                <td>{{home}}</td>
+                <td>{{away}}</td>
+                <td>{{result}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>

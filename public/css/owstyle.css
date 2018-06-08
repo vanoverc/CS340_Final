@@ -1,0 +1,86 @@
+.defaultBackground{
+    background-color: #222;
+}
+
+body{
+    margin:auto;
+    background-color: #f0edf2 /*#222;*/
+}
+
+.content{
+    width: 80%;
+    margin-left: 10%;
+}
+
+h2{
+    text-transform: uppercase;
+}
+
+.docBody{
+	position: relative;
+	bottom: 50px;
+}
+
+#navContainer{
+    max-width: 90%;
+    margin-left: auto;
+	margin-right: auto;
+	background-color: rgba(0,0,0,.75);
+	position: -webkit-sticky; /* Safari */
+    position: sticky;
+	top: 5px;
+	z-index: 99;
+}
+
+#loginButton{
+    position: absolute;
+    right: 2%;
+}
+
+#navButtonContainer{
+	margin-left: 10px;
+    display: inline-block;
+}
+
+.navButton{
+    display: inline-block;
+    color: #ffffffb3;
+    /*height: 40px;*/
+    font-family: FuturaNo2D,century gothic,arial,sans-serif; /* 'Monoton', cursive; "American Typewriter";*/
+    font-size: 15.5px;
+	font-weight: 600;
+	text-transform: uppercase;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 15px;
+	padding-bottom: 15px;
+    text-decoration: none;
+	transition: color 0.4s;
+}
+
+#navButtonContainer .navButton:nth-child(1){
+    color: #2fefef;
+    font-style: italic;
+    letter-spacing: 0px;
+}
+
+.navButton:hover{
+	color: #ff9c00;
+}
+
+#navButtonContainer .navButton:nth-child(1):hover{
+    color: #ff9c00;
+}
+
+footer{
+    border-top: solid;
+    border-width: 0px;
+    color: #345177;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    text-align: center;
+	vertical-align: middle;
+	background-color: #f0edf2;
+	position: absolute;
+	width: 100%;
+}

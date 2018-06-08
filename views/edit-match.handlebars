@@ -1,0 +1,23 @@
+<div class="content">
+    <h1>Edit Match</h1>
+    <form id="edit-match" action="/updateMatch" method="post">
+        <fieldset>
+            <legend>New Match</legend>
+            <p>Home: <select name="home">
+                    {{#each leagueTeam}}
+                    <option value={{t_id}}>{{t_name}}</option>
+                    {{/each}}
+                </select>
+            <p>Away: <select name="away">
+                    {{#each leagueTeam}}
+                    <option value={{t_id}}>{{t_name}}</option>
+                    {{/each}}
+                </select>
+            </p>
+            <p>Date: <input type="date" name="day"></p>
+            <p>Time: <input type="time" name="time" value="19:00"></p>
+            <input type="hidden" name="l_id" value="{{id}}" />
+        </fieldset>
+        <input type="submit" value="Update Match">
+    </form>
+</div>

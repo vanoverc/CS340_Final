@@ -1,0 +1,310 @@
+#build-team-content{
+    min-height: 1536px;
+    margin:auto;
+}
+
+#build-team-heading{
+    /* source: http://www.wallpapermaiden.com/wallpaper/4233/overwatch-heroes-tracer-reinhardt-lucio-mercy-mccree-zenyatta-reaper*/
+    background-image: url(img/build_team/AssembleTeam_Background.png); 
+    width: 100%;
+    height: 720px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: auto;
+}
+
+#build-team-content h1{
+    position:absolute;
+    margin: auto;
+    vertical-align: middle;
+    top: 310px;
+    font-size:100px;
+    font-weight: 300;
+    text-align: center;
+    left: 17.5%;
+    color: #f0edf2;
+    text-shadow: 4px 4px 5px #777a84;
+    font-style: italic;
+}
+
+#build-team-content h2{
+    font-style: italic;
+    font-size: 32px;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+
+.no-margin{
+    margin-top:auto;
+}
+
+#build-instructions-container{
+    width:60%;
+    margin:auto;
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 25px;
+}
+
+#build-your-team-instructions h2{
+    text-shadow: 2px 2px 5px #777a84;
+}
+
+#build-your-team-instructions p{
+    font-weight: 600;
+    font-size: 20px;
+}
+
+#team-info-container{
+    background-image: url(img/build_team/DoradoLoading.jpg);
+    background-size:cover;
+    min-height: 1350px;
+}
+
+#team-info{
+    width:100%;
+    margin:auto;
+    padding-top: 150px;
+    padding-bottom: 150px;
+}
+
+#team-info h2{
+    color: #ffffffb3;
+}
+
+#team-name{
+    width: 70%;
+    height: 50px;
+    font-size: 48px;
+    background-color: transparent;
+    font-style: italic;
+    font-weight: 600;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: solid;
+    border-bottom-width: thin;
+    color: #f0edf2;
+    margin-left: 25px;
+}
+
+.league-icon{
+    width:30px;
+    height:30px;
+}
+
+.form-section{
+    margin-top: 10px;
+}
+
+#roster-container{
+    width:45%;
+    display:inline-block;
+}
+
+#roster-container p{
+    margin-left: 25%;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+#leagues-container{
+    display: inline-block;
+    width: 45%;
+    position:absolute;
+    right: 0%;
+}
+
+#roster-heading{
+    background-color: rgba(255, 255, 255, 0.4);
+    height: 75px;
+    margin-bottom:2px;
+}
+
+#leagues-heading{
+    background-color: rgba(255, 255, 255, 0.4);
+    height: 75px;
+    margin-bottom:2px;
+}
+
+#team-skill{
+    position: relative;
+    font-size: 64px;
+    font-style:italic;
+    letter-spacing: -5px;
+    color:#ffffff;
+    margin-left: 35%;
+}
+
+.sr{
+    color:#ff00dc;
+    font-style: italic;
+    position: relative;
+    bottom:35%;
+    margin-left: 5px;
+    font-size: 24px;
+}
+
+#roster-heading h2{
+    margin:auto;
+    margin-left: 15%;
+    padding-top: 25px;
+    font-weight: 100;
+    color: #ffffff;
+    display: inline-block;
+}
+
+#leagues-heading h2{
+    margin:auto;
+    margin-right: 15%;
+    padding-top: 25px;
+    font-weight: 100;
+    text-align: right;
+    color: #ffffff;
+}
+
+.roster-table{
+    color: #f0edf2;
+    border-left: solid;
+    border-color:#1df21d;
+    margin-left: 15%
+}
+
+.roster-table th{
+    text-align: right;
+}
+
+.roster-table tr{
+    height: 36px;
+}
+
+.roster-table td{
+    background-color: rgba(18, 45, 124, 0.5);/*rgba(1, 43, 168, 0.5);*/
+    border: solid;
+    border-color: transparent;
+    font-style:italic;
+    font-size:28px;
+    text-align: right;
+}
+
+.roster-table td:first-child{
+    width: 95%;
+    padding-right: 25px;
+}
+
+#add-player{
+    height: 48px;
+    margin-left:15%;
+    background-color: rgba(18, 45, 124, 0.5);  
+    width: 84.8%;
+}
+
+#player-name{
+    background-color: transparent;
+    font-style: italic;
+    font-weight: 100;
+    font-size: 28px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: solid;
+    border-bottom-width: thin;
+    color: #f0edf2;
+    margin-left: 25px;
+    width:84%;
+}
+
+#add-player-button{
+    width: 10%;
+    height: 48px;
+    background-color: rgba(18, 45, 124, 0.5);
+    border-color:transparent;
+    font-size: 24px;
+    color: #fefefe;
+}
+
+#add-player-button:hover{
+    cursor: pointer;
+    background-color: rgba(69, 98, 183, 0.5);
+}
+
+.full-roster{
+    margin-left: 15%;
+    margin-top: 1px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 25%;
+    background-color: rgba(18, 45, 124, 0.5);
+    color: #fefefe;
+}
+
+.leagues-table{
+    color: #f0edf2;
+    margin-right: 15%
+}
+
+.leagues-table th{
+    background-color: rgba(153, 16, 16, 0.5);
+    text-align: center;
+    border: solid;
+    border-color: transparent;
+    font-style:italic;
+    height:48px;
+}
+
+.leagues-table tr{
+    height: 36px;
+}
+
+.leagues-table td{
+    background-color: rgba(153, 16, 16, 0.5);/*rgba(1, 43, 168, 0.5);*/
+    border: solid;
+    border-color: transparent;
+    font-style:italic;
+    font-size:28px;
+    text-align: center;
+    width: 48px;
+}
+
+.leagues-table td:nth-child(9){
+    width: 80px;
+}
+
+.join-league{
+    background-color: #ff9c00;
+    border:none;
+    color: #fefefe;
+    font-weight: 600;
+    cursor: pointer;
+    padding-top:5px;
+    padding-bottom:5px;
+    font-size:16px;
+    border-radius: 2px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.join-league:hover{
+    background-color: #ffbc51;
+}
+
+.icon {
+    width:48px;
+    height: 48px;
+}
+
+.icon-ow {
+    width: 36px;
+    height: 36px;
+    vertical-align: middle;
+}
+
+#submit-team{
+    position: absolute;
+    font-size: 24px;
+    right: 7.5%;
+    padding-right: 20px;
+    padding-left: 20px;
+    border-radius: 2px;
+    margin-top: 10px;
+    transition: 0.5s;
+}

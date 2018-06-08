@@ -1,0 +1,70 @@
+<head>
+    {{#each styleSheet}}
+        <link rel="stylesheet" href="./public/css/{{this}}">
+    {{/each}}
+    <!--    
+    <link rel="stylesheet" type="text/css" href="/public/owstyle.css">
+	<link rel="stylesheet" type="text/css" href="/public/home-style.css"> -->
+</head>
+<div class="content">
+    <h1>Leagues - Team Kill</h1>
+    <form id="create-league" action="/leagues" method="post">
+        <fieldset>
+            <legend>New League</legend>
+            <p>Day: <select name="day">
+                    <option value="0">Monday</option>
+                    <option value="1">Tuesday</option>
+                    <option value="2">Wednesday</option>
+                    <option value="3">Thursday</option>
+                    <option value="4">Friday</option>
+                    <option value="5">Satday</option>
+                    <option value="6">Sunday</option>
+                </select>
+            <p>Skill Tier: <select name="skill">
+                    <option value="6">Grand Master</option>
+                    <option value="5">Master</option>
+                    <option value="4">Diamond</option>
+                    <option value="3">Platinum</option>
+                    <option value="2">Gold</option>
+                    <option value="1">Silver</option>
+                    <option value="0">Bronze</option>
+                </select>
+            </p>
+            <p>Division: <select name="division">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </p>
+            <p>Start Date: <input type="date" name="start_date"></p>
+            <p>End Date: <input type="date" name="end_date"></p>
+        </fieldset>
+        <input type="submit" value="Create League">
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Day</th>
+                <th>Skill Rank</th>
+                <th>Division</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each league}}
+            <tr>
+                <td><a href="/league/{{l_id}}">{{l_id}}</a></td>
+                <td><a href="/league/{{l_id}}">{{l_day}}</a></td>
+                <td><a href="/league/{{l_id}}">{{l_skill_rank}}</a></td>
+                <td><a href="/league/{{l_id}}">{{l_division}}</a></td>
+                <td><a href="/league/{{l_id}}">{{l_start_date}}</a></td>
+                <td><a href="/league/{{l_id}}">{{l_end_date}}</a></td>
+                <td><a href="/removeLeague/{{l_id}}"><button>Delete</button></a></td>
+            </tr>
+            {{/each}}
+        </tbody>
+        </table>
+    </table>
+</div>

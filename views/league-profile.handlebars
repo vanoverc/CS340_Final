@@ -1,0 +1,80 @@
+<head>
+    {{#each styleSheet}}
+        <link rel="stylesheet" href="../public/css/{{this}}">
+    {{/each}}
+   
+</head>
+
+<div class="content">
+    <h1>League Profile</h1>
+    <h2>{{league.l_skill_rank}} - {{league.l_day}} - Division {{league.l_division}}</h2>
+
+    <h2>Matches</h2>
+    <form id="create-match" action="/matches" method="post">
+        <fieldset>
+            <legend>New Match</legend>
+            <p>Home: <select name="home">
+                    {{#each leagueTeam}}
+                    <option value={{t_id}}>{{t_name}}</option>
+                    {{/each}}
+                </select>
+            <p>Away: <select name="away">
+                    {{#each leagueTeam}}
+                    <option value={{t_id}}>{{t_name}}</option>
+                    {{/each}}
+                </select>
+            </p>
+            <p>Date: <input type="date" name="day"></p>
+            <p>Time: <input type="time" name="time" value="19:00"></p>
+            <input type="hidden" name="l_id" value="{{id}}" />
+        </fieldset>
+        <input type="submit" value="Create Match">
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Time</th>
+                <th>Day</th>
+                <th>League</th>
+                <th>Home Team</th>
+                <th>Away Team</th>
+                <th>Result</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each match}}
+            <tr>
+                <td>{{m_id}}</td>
+                <td>{{time}}</td>
+                <td>{{month}}/{{day}}/{{year}}</td>
+                <td>{{m_league}}</td>
+                <td>{{home}}</td>
+                <td>{{away}}</td>
+                <td>{{result}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+    <h2>Teams</h2>
+    <form id="add-team-league" action="/addTeamLeague" method="post">
+        <fieldset>
+            <legend>Add Team</legend>
+            <select name="t_id">
+                {{#each team}}
+                <option value={{t_id}}>{{t_name}}</option>
+                {{/each}}
+            </select>
+            <input type="hidden" name="l_id" value="{{id}}" />
+        </fieldset>
+        <input type="submit" value="Add Team">
+    </form>
+    <table>
+        {{#each leagueTeam}}
+        <tr>
+            <td><a href="/team/{{t_id}}">{{t_name}}</a></td>
+        </tr>
+        {{/each}}
+    </table>
+</div>

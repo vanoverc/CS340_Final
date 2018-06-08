@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Team Kill</title>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        {{#each jsScripts}}
+        <script src="./public/{{this}}"></script>
+        {{/each}}
+        <link rel="shortcut icon" type="image/x-icon" href="img/favicon2.jpg" />
+    </head>
+    <body>
+        {{> "header" }}
+        
+        <div>
+        {{{body}}}
+        </div>
+
+        {{> "footer" }}
+    </body>
+</html>

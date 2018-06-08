@@ -1,0 +1,109 @@
+<head>
+    {{#each styleSheet}}
+        <link rel="stylesheet" href="./public/css/{{this}}">
+    {{/each}}
+    <!--    
+    <link rel="stylesheet" type="text/css" href="/public/owstyle.css">
+	<link rel="stylesheet" type="text/css" href="/public/home-style.css"> -->
+</head>
+
+
+	<div class="docBody">
+		<section id="billboardContainer">
+            <div class="slideshow-container">
+                <div class="mySlides fade">
+                    <div id="mySlides1">
+                        <div class="slideContent">
+                            <h1>Team Kill</h1>
+                            <h2>A better way to play Overwatch</h2>
+                            <ul>
+                                <li><a href="build-team.html">Grab some friends and form a team</a></li>
+                                <li><a href="leagues.html">Join a league and play like the pro's</a></li>
+                                <li><a href="leagues.html">Compete in open tournaments to test your skill</a></li> <!-- Intentionally directs to leagues page -->
+                            </ul>
+                        </div>
+                        <div id="nowEntering">
+                            <div id="owLogo"></div>
+                            <span id="betterOverwatch">Better Overwatch</span>
+                            <span id="loading">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mySlides fade">
+                    <img src="./public/img/cup_ads/SingaporeCup.png">
+                </div>
+                <div class="mySlides fade">
+                    <img src="./public/img/cup_ads/MsiCup.png">
+                </div>
+                <div class="mySlides fade">
+                    <img src="./public/img/cup_ads/TracerCup.jpg">
+                </div>
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+            </div>
+            <br>
+            <div style="text-align:center">
+              <span class="dot" onclick="currentSlide(1)"></span> 
+              <span class="dot" onclick="currentSlide(2)"></span> 
+              <span class="dot" onclick="currentSlide(3)"></span>
+              <span class="dot" onclick="currentSlide(4)"></span> 
+            </div>
+        </section>
+        <section id="howToSection">
+            <div id="howToBuildTeam" class="howTo">
+                <div class="howToContent">
+                    <div class="howToImage-left"></div>
+                    <div class="howToContent-right">
+                        <h2>Assemble Your Team</h2>
+                        <ul>
+                            <li>Ditch solo queue and start playing Overwatch the right way</li>
+                            <li>You and your friends can form a persistent team<br> with 6 to 12 members</li>
+                            <li>Create strategies, make plays, and dominate with team work</li>
+                            <li>Stop grinding rank with strangers and start<br> having fun with friends!</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="howToJoinLeague" class="howTo">
+                <div class="howToContent">
+                    <div class="howToContent-left">
+                        <h2>Join a League</h2>
+                        <ul>
+                            <li>Compete in organized leagues with scheduled matches</li>
+                            <li>Take your team to the top through our system<br> of promotion and relegation</li>
+                            <li>Win championships and build rivalries to turn up the intensity!</li>
+                        </ul>
+                    </div>
+                    <div class="howToImage-right"></div>
+                </div>
+            </div>
+        </section>
+	</div>
+    <script>
+        var slideIndex = 1;
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+        showSlides(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+        showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("dot");
+        if (n > slides.length) {slideIndex = 1}    
+        if (n < 1) {slideIndex = slides.length}
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";  
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex-1].style.display = "block";  
+        dots[slideIndex-1].className += " active";
+        }
+    </script>

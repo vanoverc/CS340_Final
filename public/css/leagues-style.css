@@ -1,0 +1,125 @@
+#standings-content{
+    background-image: url(img/leagues/Spawn.jpg);
+    background-attachment: fixed;
+    background-size: cover;
+    min-height: 768px;
+    padding-top: 75px;
+}
+
+.tab{
+    background-color: #ffffff; /*#222;*/
+    width: 80%;
+    margin:auto;
+    margin-bottom: 25px;
+    height: 50px;
+    position: sticky;
+    position: -webkit-sticky;
+    top: 55px;
+    box-shadow: 1px 1px 5px #777a84;
+    z-index: 99;
+}
+
+.tablinks{
+    background-color: #ffffff;
+    height: 95%;
+    font-size: 18px;
+    padding-left:10px;
+    padding-right:10px;
+    margin:auto;
+    cursor: pointer;
+    border: none;
+    position:relative;
+    bottom:20px;
+}
+
+.tablinks:hover{
+    color:#ff9c00;
+    border-bottom: solid;
+    border-bottom-color: #ff9c00;
+    border-bottom-width: thick;
+}
+
+#team-admin{
+    display:inline-block;
+    padding:0;
+}
+
+.active{
+    color:#ff9c00;
+    border-bottom: solid;
+    border-bottom-color: #ff9c00;
+    border-bottom-width: thick;
+}
+
+
+.tabcontent {
+    display: none;
+    /*padding: 6px 12px;*/
+}
+
+.tabcontent .standings-container{
+    width: 75%;
+    margin: auto;
+    /*border:solid;*/
+}
+
+.standings-container h1{
+    color: #f0edf2;
+    font-size: 72px;
+    font-weight: 400;
+    font-style: italic;
+    text-shadow: 2px 2px 5px #c4c4c4;
+    margin-top:25px;
+}
+
+.tabcontent .standings{
+    width:30%;
+    background-color: #f0edf2;
+    margin-bottom: 25px;
+    padding-left: 1%;
+    box-shadow: 3px 3px 10px;
+    border-radius: 2px;
+    text-shadow: 2px 2px 5px #c4c4c4;
+    display: inline-block;
+}
+
+.h1_division{
+    height: 100px;
+    position:relative;
+    top: 25px;
+}
+
+h3.standings-content{
+    font-style: italic;
+}
+
+table.standings-content{
+    padding-bottom: 24px;
+    width:95%;
+}
+
+table.standings-content tr:nth-of-type(odd){
+    background-color: #ffffff;
+}
+
+.standings th{
+    border: none;
+}
+
+.standings td{
+    border: none;
+    text-align: center;
+}
+
+.team-column{
+    text-align: left;
+}
+
+.tabcontent .standings:nth-child(2){
+    margin-right: 3%;
+    margin-left: 3%;
+}
+
+#grandmaster-standings{
+    display:block;
+}
