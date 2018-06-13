@@ -1,23 +1,63 @@
+<head>
+    {{#each styleSheet}}
+        <link rel="stylesheet" href="../public/css/{{this}}">
+    {{/each}}
+    <!--    
+    <link rel="stylesheet" type="text/css" href="/public/owstyle.css">
+	<link rel="stylesheet" type="text/css" href="/public/home-style.css"> -->
+</head>
+
 <div class="content">
     <h1>Edit Match</h1>
     <form id="edit-match" action="/updateMatch" method="post">
         <fieldset>
             <legend>New Match</legend>
-            <p>Home: <select name="home">
+            <input type="hidden" id="home_team" name="home_team" value={{match.m_home}} />
+            <input type="hidden" id="away_team" name="away_team" value={{match.m_away}} />
+            <input type="hidden" id="current_result" name="current_result" value={{match.m_result}} />
+            <p>Home: <select id="homeTeam" name="home">
                     {{#each leagueTeam}}
-                    <option value={{t_id}}>{{t_name}}</option>
+                    <option id="home_{{t_id}}" value={{t_id}}>{{t_name}}</option>
                     {{/each}}
+                    <option id="home_" value="NULL">NULL</option>
                 </select>
-            <p>Away: <select name="away">
+            <p>Away: <select id="awayTeam" name="away">
                     {{#each leagueTeam}}
-                    <option value={{t_id}}>{{t_name}}</option>
+                    <option id="away_{{t_id}}" value={{t_id}}>{{t_name}}</option>
                     {{/each}}
+                    <option id="away_" value="NULL">NULL</option>
                 </select>
             </p>
-            <p>Date: <input type="date" name="day"></p>
-            <p>Time: <input type="time" name="time" value="19:00"></p>
-            <input type="hidden" name="l_id" value="{{id}}" />
+            <p>Date: <input type="date" name="day" value={{match.m_day}}></p>
+            <p>Time: <input type="time" name="time" value={{match.m_time}}></p>
+            <p>Result: <select name="result">
+                {{#each result}}
+                <option id="result_{{r_id}}" value={{r_id}}>{{r_value}}</option>
+                {{/each}}
+            </select>
+            </p>
+            <input type="hidden" name="m_id" value="{{id}}" />
         </fieldset>
         <input type="submit" value="Update Match">
     </form>
 </div>
+
+<script>
+    $(function(){
+        var homeId = "#home_" + $('#home_team').val();
+        
+        if($('#home_team').val() == "/"){
+            homeId = "#home_";
+        }
+        var awayId = "#away_" + $('#away_team').val();
+        
+        if($('#away_team').val() == "/"){
+            awayId = "#away_";
+        }
+        var currentResult = "#result_" + $('#current_result').val();
+        
+        $(homeId).attr("selected", "selected");
+        $(awayId).attr("selected", "selected");
+        $(currentResult).attr("selected", "selected");
+    });
+</script>
