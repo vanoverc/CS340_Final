@@ -116,9 +116,9 @@ function getMatches(res, mysql, context, complete){
     //console.log("Getting matches...");
     var myQuery = "SELECT m_id, m_time, m_day, m_league, m_home, m_away, t1.t_name AS home, t2.t_name AS away, m_result, r.r_value AS result";
     myQuery = myQuery + " FROM `match` ";
-    myQuery = myQuery + "INNER JOIN `team` t1 ON m_home = t1.t_id ";
-    myQuery = myQuery + "INNER JOIN `team` t2 ON m_away = t2.t_id ";
-    myQuery = myQuery + "INNER JOIN `result` r ON m_result = r_id";
+    myQuery = myQuery + "LEFT JOIN `team` t1 ON m_home = t1.t_id ";
+    myQuery = myQuery + "LEFT JOIN `team` t2 ON m_away = t2.t_id ";
+    myQuery = myQuery + "INNER JOIN `result` r ON m_result = r_id ORDER BY m_day ASC";
     
     // Request all rows in match table from mysql database
     mysql.pool.query(myQuery, function(error, results, fields){
@@ -139,9 +139,9 @@ function getMatches(res, mysql, context, complete){
 }
 
 function getMatch(res, mysql, context, complete){
-    var myQuery = "SELECT M.m_time, M.m_day, HT.t_name AS home, AT.t_name AS away, R.r_value, L.l_skill_rank, L.l_division, L.l_day ";
-    myQuery = myQuery + "FROM `match` M INNER JOIN team HT ON HT.t_id = M.m_home ";
-    myQuery = myQuery + "INNER JOIN team AT ON AT.t_id = M.m_away ";
+    var myQuery = "SELECT M.m_time, M.m_day, M.m_league, M.m_home, M.m_away, M.m_result, HT.t_name AS home, AT.t_name AS away, R.r_value, L.l_skill_rank, L.l_division, L.l_day ";
+    myQuery = myQuery + "FROM `match` M LEFT JOIN team HT ON HT.t_id = M.m_home ";
+    myQuery = myQuery + "LEFT JOIN team AT ON AT.t_id = M.m_away ";
     myQuery = myQuery + "INNER JOIN result R ON R.r_id = M.m_result ";
     myQuery = myQuery + "INNER JOIN league L ON L.l_id = M.m_league WHERE M.m_id = ?;";
 
@@ -151,10 +151,54 @@ function getMatch(res, mysql, context, complete){
             res.end();
         }
         context.match = results[0];
+        console.log(context.match);
         parseMatchDates(context.match);
+        context.match.m_day = context.match.year + "-" + context.match.month + "-" + context.match.day;
+        console.log(context.match.m_day);
         context.match.l_skill_rank = formatRank(context.match.l_skill_rank);
         context.match.l_day = formatDay(context.match.l_day);
         complete();
+    });
+}
+
+function removeMatch(res, mysql, context, complete){
+    var myQuery = "DELETE FROM `match` WHERE m_id = (?)";
+    var inserts = [context.id];
+    mysql.pool.query(myQuery, inserts, function(error, results, fields){
+	if(error){
+	    res.write(JSON.stringify(error));
+	    res.status(400);
+	    res.end();
+	}
+	
+	// Call callback function
+	complete();
+    });
+}
+
+function updateMatch(req, res, mysql, context, complete){  
+    var myQuery = "UPDATE `match` SET m_time = ?, m_day = ?, m_home = ?, m_away = ?, m_result = ? WHERE m_id = (?);";
+    var inserts = [];
+    var someNull = null;
+    if(req.body.home == "NULL"){
+        inserts = [req.body.time, req.body.day, someNull, req.body.away, req.body.result, req.body.m_id];    
+    }else if(req.body.away == "NULL"){
+        inserts = [req.body.time, req.body.day, req.body.home, someNull, req.body.result, req.body.m_id];
+    }else{
+        inserts = [req.body.time, req.body.day, req.body.home, req.body.away, req.body.result, req.body.m_id];
+    }
+    
+    console.log("Update match inserts:");
+    console.log(inserts);
+    mysql.pool.query(myQuery, inserts, function(error, results, fields){
+	if(error){
+        console.log("Error updating match");
+	    res.write(JSON.stringify(error));
+	    res.status(400);
+	    res.end();
+	}
+	// Call callback function
+	complete();
     });
 }
 
@@ -270,10 +314,6 @@ function getTeamMatches(res, mysql, context, complete){
     });
 }
 
-function removePlayerTeam(res, mysql, context, complete){
-
-}
-
 function removeLeague(res, mysql, context, complete){
 
     var myQuery = "DELETE FROM `league` WHERE l_id = (?)";
@@ -308,7 +348,7 @@ function getLeague(res, mysql, context, complete){
 
 function getLeagueTeams(res, mysql, context, complete){
     var myQuery = "SELECT t.t_name, t.t_id FROM team t INNER JOIN league_team lt ON lt.t_id=t.t_id ";
-    myQuery = myQuery + "INNER JOIN league l ON l.l_id = lt.l_id WHERE l.l_id = ?;";
+    myQuery = myQuery + "INNER JOIN league l ON l.l_id = lt.l_id WHERE l.l_id = ?";
 
     mysql.pool.query(myQuery, context.id, function(error, results, fields){
         if(error){
@@ -345,7 +385,10 @@ function getLeagueMatches(res, mysql, context, complete){
 }
 
 function getPlayers(res, mysql, context, complete){
-    var myQuery = "SELECT p_id, p_tag, p_name FROM `player`";
+    var myQuery = "SELECT P.p_id, P.p_tag, P.p_name , T.t_name FROM `player` P ";
+    myQuery = myQuery + "INNER JOIN `player_team` PT ON PT.p_id = P.p_id ";
+    myQuery = myQuery + "INNER JOIN `team` T ON T.t_id = PT.t_id ";
+    myQuery = myQuery + "ORDER BY T.t_name ASC";
     mysql.pool.query(myQuery, function(error, results, fields){
         if(error){
             res.write(JSON.stringify(error));
@@ -361,8 +404,36 @@ function getPlayers(res, mysql, context, complete){
     });
 }
 
+function filterPlayers(res, mysql, context, complete){
+    console.log("filter_id = " + context.t_id);
+    var myQuery = "SELECT P.p_id, P.p_tag, P.p_name, T.t_name, T.t_id FROM `player` P ";
+    myQuery = myQuery + "INNER JOIN `player_team` PT ON PT.p_id = P.p_id ";
+    myQuery = myQuery + "INNER JOIN `team` T ON T.t_id = PT.t_id ";
+    
+    if(context.t_id == "all"){
+        myQuery = myQuery + "ORDER BY T.t_name ASC";
+    }else{
+        myQuery = myQuery + "WHERE T.t_id = ? ";
+        myQuery = myQuery + "ORDER BY P.p_name ASC;";
+    }
+    mysql.pool.query(myQuery, context.t_id, function(error, results, fields){
+        if(error){
+            res.write(JSON.stringify(error));
+            res.end();
+        }
+        //console.log(results); 
+        // Assign the query response to context.player
+        context.allPlayers = results;
+	//console.log(context);
+
+	// Call callback function
+	complete();
+    });
+}
+
 function getPlayer(res, mysql, context, id, complete){
-    var myQuery = "SELECT p_id, p_tag, p_name FROM `player` WHERE p_id = ?";
+    var myQuery = "SELECT P.p_id, P.p_tag, P.p_name T.t_name FROM `player` P ";
+    myQuery = myQuery + "INNER JOIN player_team PT WHERE p_id = ?";
     var inserts = [id];
     mysql.pool.query(myQuery, inserts, function(error, results, fields){
 	if(error){
@@ -429,8 +500,20 @@ function getPlayerMatches(res, mysql, context, id, complete){
 	context.match.forEach(element => {
 	    parseMatchDates(element);
 	});
-	console.log(context.match);
+	//console.log(context.match);
 	complete();
+    });
+}
+
+function getResults(res, mysql, context, complete){
+    var myQuery = "SELECT r_id, r_value FROM result WHERE ?";
+    mysql.pool.query(myQuery, 1, function(error, results, fields){
+        if(error){
+            res.write(JSON.stringify(error));
+            res.end();
+        }
+        context.result = results;
+        complete();
     });
 }
 
@@ -439,7 +522,19 @@ var express = require('express');
 var app = express();
 
 // Setup handlebars
-var handlebars = require('express-handlebars').create({defaultLayout:'main'});
+var handlebars = require('express-handlebars').create({
+    // Specify helpers which are only registered on this instance.
+    helpers: {
+        selectTeam: function (val1, val2) {
+            if(val1 == val2){
+                return "<option value={{t_id}} selected>{{t_name}}</option>";
+            }else{
+                return "<option value={{t_id}}>{{t_name}}</option>";
+            }
+        }
+    },
+    defaultLayout:'main'});
+
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 
@@ -549,9 +644,28 @@ app.get('/players', function(req, res){
     var context = {};
     context.styleSheet = ["owstyle.css", "home-style.css"];
     getPlayers(res, mysql, context, complete);
+    getTeams(res, mysql, context, complete);
     function complete(){
         callbackCount++;
-        if(callbackCount >= 1){
+        if(callbackCount >= 2){
+            console.log(context);
+            res.render('players', context);
+        }
+    }
+});
+
+app.post('/filter-players', function(req, res){
+    var callbackCount = 0;
+    var context = {};
+    console.log("Filter request: ");
+    console.log(req.body);
+    context.t_id = req.body.t_id;
+    context.styleSheet = ["owstyle.css", "home-style.css"];
+    filterPlayers(res, mysql, context, complete);
+    getTeams(res, mysql, context, complete);
+    function complete(){
+        callbackCount++;
+        if(callbackCount >= 2){
             console.log(context);
             res.render('players', context);
         }
@@ -636,15 +750,11 @@ app.get('/removeLeague/:id', function(req, res){
     var callbackCount = 0;
     var context = {};
     context.id = req.params.id;
-    context.styleSheet = ["owstyle.css", "home-style.css"];
     removeLeague(res, mysql, context, complete);
     function complete(){
         callbackCount++;
         if(callbackCount >= 1){
-            getLeagues(res, mysql, context, refresh);
-            function refresh(){
-                res.render('leagues', context);
-            }
+            res.redirect('/leagues');
         }
     }
 });
@@ -682,6 +792,7 @@ app.post('/addTeamLeague/', function(req, res){
 });
 
 app.get('/matches', function(req, res){
+    //console.log("GET Matches started");
     var callbackCount = 0;
     var context = {};
     context.styleSheet = ["owstyle.css", "home-style.css"];
@@ -695,6 +806,7 @@ app.get('/matches', function(req, res){
 });
 
 app.post('/matches', function(req, res){
+    //console.log("POST Matches started");
     var myQuery = "INSERT INTO `match` (m_time, m_day, m_league, m_home, m_away, m_result) values (?, ?, ?, ?, ?, ?);";
     var inserts = [req.body.time, req.body.day, req.body.l_id, req.body.home, req.body.away, 1];
     mysql.pool.query(myQuery, inserts, function(error, results, fields){
@@ -709,15 +821,51 @@ app.post('/matches', function(req, res){
 });
 
 app.get('/match/:id', function(req, res){
-    var callbackCount = 0;
+    
     var context = {};
     context.id = req.params.id;
     context.styleSheet = ["owstyle.css", "home-style.css"];
-    getMatch(res, mysql, context, complete);
+    getMatch(res, mysql, context, complete1);
+    function complete1(){
+        console.log("Match returns");
+        var callbackCount = 0;
+        console.log(context.match.m_league);
+        context.id = context.match.m_league;
+        getLeagueTeams(res, mysql, context, complete2);
+        getResults(res, mysql, context, complete2);
+
+        function complete2(){
+            callbackCount++;
+            console.log("complete2 callbackCount = " + callbackCount);
+            if(callbackCount >= 2){
+                context.id = req.params.id;
+                res.render('edit-match', context);
+            }
+        }
+    }
+});
+
+app.get('/removeMatch/:id', function(req, res){
+    var callbackCount = 0;
+    var context = {};
+    context.id = req.params.id;
+    removeMatch(res, mysql, context, complete);
     function complete(){
         callbackCount++;
         if(callbackCount >= 1){
-            res.render('edit-match', context);
+            res.redirect('/matches');
+        }
+    }
+});
+
+app.post('/updateMatch', function(req, res){
+    var callbackCount = 0;
+    var context = {};
+    updateMatch(req, res, mysql, context, complete);
+    function complete(){
+        callbackCount++;
+        if(callbackCount >= 1){
+            res.redirect('/matches');
         }
     }
 });
