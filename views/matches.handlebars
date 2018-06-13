@@ -24,13 +24,14 @@
         <tbody>
             {{#each match}}
             <tr>
-                <td>{{m_id}}</td>
-                <td>{{time}}</td>
-                <td>{{month}}/{{day}}/{{year}}</td>
-                <td>{{m_league}}</td>
-                <td>{{home}}</td>
-                <td>{{away}}</td>
-                <td>{{result}}</td>
+                <td><a href="/match/{{m_id}}">{{m_id}}</a></td>
+                <td><a href="/match/{{m_id}}">{{time}}</a></td>
+                <td><a href="/match/{{m_id}}">{{month}}/{{day}}/{{year}}</a></td>
+                <td><a href="/match/{{m_id}}">{{m_league}}</a></td>
+                <td><a href="/match/{{m_id}}">{{home}}</a></td>
+                <td><a href="/match/{{m_id}}">{{away}}</a></td>
+                <td><a href="/match/{{m_id}}">{{result}}</a></td>
+                <td><a href="/removeMatch/{{m_id}}"><button>Delete</button></a></td>
             </tr>
             {{/each}}
         </tbody>

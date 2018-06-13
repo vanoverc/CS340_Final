@@ -14,8 +14,22 @@
             <legend>New Player</legend>
             <p>Battle.net Tag: <input type="text" name="p_tag"/></p>
             <p>Player Name: <input type="text" name="p_name"/></p>
+            <input type="submit" value="Create Player">
         </fieldset>
-        <input type="submit" value="Create Player">
+    </form>
+    <br />
+    <form id="team-filter" action="/filter-players" method="post">
+        <fieldset>
+            <legend>Filter by team</legend>
+            <p>Team: <select name="t_id">
+                <option value="all">All Teams</option>      
+                {{#each team}}
+                <option value="{{t_id}}">{{t_name}}</option>
+                {{/each}}
+            </select>
+            </p>
+            <input type="submit" value="Apply Filter">
+        </fieldset>
     </form>
     <table>
         <thead>
@@ -30,6 +44,7 @@
             
                 <tr>
                     <td><a href="./player/{{p_id}}">{{p_id}}</a></td>
+                    <td><a href="./team/{{t_id}}">{{t_name}}</a></td>
                     <td><a href="./player/{{p_id}}">{{p_tag}}</a></td>
                     <td><a href="./player/{{p_id}}">{{p_name}}</a></td>
                     <td><a href="/removePlayer/{{p_id}}"><button>Delete</button></a></td>
