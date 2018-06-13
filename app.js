@@ -276,7 +276,7 @@ function removeTeam(res, mysql, context, complete){
 }
 
 function getTeamPlayers(res, mysql, context,  complete){
-    var myQuery = "SELECT t.t_id, p.p_name FROM `team` t ";
+    var myQuery = "SELECT t.t_id, p.p_name, p.p_tag FROM `team` t ";
     myQuery = myQuery + "INNER JOIN `player_team` pt ON t.t_id = pt.t_id ";
     myQuery = myQuery + "INNER JOIN `player` p ON pt.p_id = p.p_id ";
     myQuery = myQuery + "WHERE t.t_id = ?";
@@ -386,8 +386,8 @@ function getLeagueMatches(res, mysql, context, complete){
 
 function getPlayers(res, mysql, context, complete){
     var myQuery = "SELECT P.p_id, P.p_tag, P.p_name , T.t_name FROM `player` P ";
-    myQuery = myQuery + "INNER JOIN `player_team` PT ON PT.p_id = P.p_id ";
-    myQuery = myQuery + "INNER JOIN `team` T ON T.t_id = PT.t_id ";
+    myQuery = myQuery + "LEFT JOIN `player_team` PT ON PT.p_id = P.p_id ";
+    myQuery = myQuery + "LEFT JOIN `team` T ON T.t_id = PT.t_id ";
     myQuery = myQuery + "ORDER BY T.t_name ASC";
     mysql.pool.query(myQuery, function(error, results, fields){
         if(error){
@@ -407,8 +407,8 @@ function getPlayers(res, mysql, context, complete){
 function filterPlayers(res, mysql, context, complete){
     console.log("filter_id = " + context.t_id);
     var myQuery = "SELECT P.p_id, P.p_tag, P.p_name, T.t_name, T.t_id FROM `player` P ";
-    myQuery = myQuery + "INNER JOIN `player_team` PT ON PT.p_id = P.p_id ";
-    myQuery = myQuery + "INNER JOIN `team` T ON T.t_id = PT.t_id ";
+    myQuery = myQuery + "LEFT JOIN `player_team` PT ON PT.p_id = P.p_id ";
+    myQuery = myQuery + "LEFT JOIN `team` T ON T.t_id = PT.t_id ";
     
     if(context.t_id == "all"){
         myQuery = myQuery + "ORDER BY T.t_name ASC";
@@ -432,8 +432,8 @@ function filterPlayers(res, mysql, context, complete){
 }
 
 function getPlayer(res, mysql, context, id, complete){
-    var myQuery = "SELECT P.p_id, P.p_tag, P.p_name T.t_name FROM `player` P ";
-    myQuery = myQuery + "INNER JOIN player_team PT WHERE p_id = ?";
+    var myQuery = "SELECT P.p_id, P.p_tag, P.p_name FROM `player` P ";
+    myQuery = myQuery + "WHERE p_id = ?";
     var inserts = [id];
     mysql.pool.query(myQuery, inserts, function(error, results, fields){
 	if(error){
@@ -623,19 +623,19 @@ app.get('/team/:id', function(req, res){
     }
 });
 
-app.post('/addPlayerTeam/', function(req, res){
+app.post('/addPlayerTeam', function(req, res){
     var myQuery = "INSERT INTO `player_team` (p_id, t_id) values (?, ?)";
     console.log("p_id = " + req.body.p_id);
     console.log("t_id = " + req.body.t_id);
     var inserts = [req.body.player, req.body.t_id];
     mysql.pool.query(myQuery, inserts, function(error, results, fields){
-	if(error){
-	    res.write(JSON.string.stringify(error));
-	    res.end();
-	}else{
-	    var someUrl = '/team/' + req.body.t_id;
-	    res.redirect(someUrl);
-	}
+        if(error){
+            res.write(JSON.string.stringify(error));
+            res.end();
+        }else{
+            var someUrl = '/team/' + req.body.t_id;
+            res.redirect(someUrl);
+        }
     });
 });
 
